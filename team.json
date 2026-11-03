@@ -1,0 +1,11 @@
+{
+  "team_number": "T0089",
+  "group_lead": { "name": "Harshal Grover", "enrollment_no": "2501010180", "github": "https://github.com/harshalgrover" },
+  "members": [
+    { "name": "Jahanvi Jain", "enrollment_no": "2501010196", "github": "https://github.com/jahanvijain02" },
+    { "name": "Yug Rastogi", "enrollment_no": "2501010684", "github": "https://github.com/yugrastogi" },
+    { "name": "Yogye Berry", "enrollment_no": "2501010532", "github": "https://github.com/yogyeberry" }
+  ],
+  "postgres_version": "",
+  "laptop_used_for_benchmarks": ""
+}
