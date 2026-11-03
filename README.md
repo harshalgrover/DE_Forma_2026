@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Harshal Grover | 2501010180 | harshalgrover|
+| Member 2 | Jahanvi Jain | 2501010196 | jahanvijain02 |
+| Member 3 |Yogye Berry | 2501010532 | yogyeberry |
+| Member 4 | Yug Rastogi| 2501010684 | yugrastogi |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0089 · **Section:** D · **Repository URL:** https://github.com/harshalgrover/DE_Forma_2026
 
 ---
 
