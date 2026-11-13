@@ -1,0 +1,45 @@
+=== R21 run 1 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=0.873..0.875 rows=25 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=0.873..0.873 rows=25 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.006..0.622 rows=300 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.261 ms
+Execution Time: 0.885 ms
+=== R21 run 2 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=1.000..1.001 rows=25 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=0.999..1.000 rows=25 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.007..0.699 rows=300 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.238 ms
+Execution Time: 1.011 ms
+=== R21 run 3 ===
+Limit  (cost=81.05..81.11 rows=25 width=47) (actual time=1.187..1.189 rows=25 loops=1)
+  Buffers: shared hit=38
+  ->  Sort  (cost=81.05..81.81 rows=303 width=47) (actual time=1.187..1.188 rows=25 loops=1)
+        Sort Key: merchant_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=38
+        ->  Seq Scan on merchants  (cost=0.00..72.50 rows=303 width=47) (actual time=0.006..0.830 rows=300 loops=1)
+              Filter: ((merchant_name)::text ~~* '%chai%'::text)
+              Rows Removed by Filter: 2700
+              Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.221 ms
+Execution Time: 1.200 ms

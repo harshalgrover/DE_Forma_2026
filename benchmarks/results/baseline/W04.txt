@@ -1,0 +1,33 @@
+=== W04 run 1 ===
+Update on rewards  (cost=0.00..1046.67 rows=0 width=0) (actual time=2.533..2.533 rows=0 loops=1)
+  Buffers: shared hit=840 dirtied=2
+  ->  Seq Scan on rewards  (cost=0.00..1046.67 rows=478 width=64) (actual time=2.166..2.299 rows=51 loops=1)
+        Filter: ((expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39748
+        Buffers: shared hit=447
+Planning:
+  Buffers: shared hit=63
+Planning Time: 0.128 ms
+Execution Time: 2.562 ms
+=== W04 run 2 ===
+Update on rewards  (cost=0.00..1046.67 rows=0 width=0) (actual time=2.921..2.921 rows=0 loops=1)
+  Buffers: shared hit=845 dirtied=1 written=1
+  ->  Seq Scan on rewards  (cost=0.00..1046.67 rows=478 width=64) (actual time=2.378..2.485 rows=51 loops=1)
+        Filter: ((expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39748
+        Buffers: shared hit=447
+Planning:
+  Buffers: shared hit=63
+Planning Time: 0.133 ms
+Execution Time: 2.952 ms
+=== W04 run 3 ===
+Update on rewards  (cost=0.00..1049.01 rows=0 width=0) (actual time=2.198..2.198 rows=0 loops=1)
+  Buffers: shared hit=845
+  ->  Seq Scan on rewards  (cost=0.00..1049.01 rows=479 width=64) (actual time=1.881..1.994 rows=51 loops=1)
+        Filter: ((expires_at < '2026-07-04 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'UNSCRATCHED'::text))
+        Rows Removed by Filter: 39748
+        Buffers: shared hit=448
+Planning:
+  Buffers: shared hit=63
+Planning Time: 0.140 ms
+Execution Time: 2.242 ms

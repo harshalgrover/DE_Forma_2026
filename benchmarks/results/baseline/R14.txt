@@ -1,0 +1,117 @@
+=== R14 run 1 ===
+Sort  (cost=8594.26..8594.27 rows=1 width=45) (actual time=17.441..18.029 rows=3 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6250
+  ->  GroupAggregate  (cost=8594.23..8594.25 rows=1 width=45) (actual time=17.433..18.022 rows=3 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=6247
+        ->  Sort  (cost=8594.23..8594.23 rows=1 width=11) (actual time=17.426..18.014 rows=4 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=6247
+              ->  Nested Loop  (cost=2194.96..8594.22 rows=1 width=11) (actual time=10.763..18.001 rows=4 loops=1)
+                    Buffers: shared hit=6244
+                    ->  Gather  (cost=2194.68..8593.92 rows=1 width=10) (actual time=10.748..17.953 rows=11 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=6232
+                          ->  Hash Join  (cost=1194.67..7593.82 rows=1 width=10) (actual time=4.936..15.934 rows=4 loops=3)
+                                Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+                                Buffers: shared hit=6232
+                                ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=32305 width=34) (actual time=0.013..11.544 rows=77636 loops=3)
+                                      Filter: (((status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM initiated_at) >= '2025'::numeric))
+                                      Rows Removed by Filter: 5853
+                                      Buffers: shared hit=4488
+                                ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=1.455..1.455 rows=2 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=1584
+                                      ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.079..1.430 rows=2 loops=3)
+                                            Filter: (user_id = 15177)
+                                            Rows Removed by Filter: 53331
+                                            Buffers: shared hit=1584
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=9) (actual time=0.004..0.004 rows=0 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=388
+Planning Time: 0.595 ms
+Execution Time: 18.061 ms
+=== R14 run 2 ===
+Sort  (cost=8594.26..8594.27 rows=1 width=45) (actual time=17.218..17.867 rows=3 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6250
+  ->  GroupAggregate  (cost=8594.23..8594.25 rows=1 width=45) (actual time=17.210..17.860 rows=3 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=6247
+        ->  Sort  (cost=8594.23..8594.23 rows=1 width=11) (actual time=17.203..17.852 rows=4 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=6247
+              ->  Nested Loop  (cost=2194.96..8594.22 rows=1 width=11) (actual time=10.360..17.836 rows=4 loops=1)
+                    Buffers: shared hit=6244
+                    ->  Gather  (cost=2194.68..8593.92 rows=1 width=10) (actual time=5.037..17.813 rows=11 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=6232
+                          ->  Hash Join  (cost=1194.67..7593.82 rows=1 width=10) (actual time=2.913..15.931 rows=4 loops=3)
+                                Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+                                Buffers: shared hit=6232
+                                ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=32305 width=34) (actual time=0.013..11.775 rows=77636 loops=3)
+                                      Filter: (((status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM initiated_at) >= '2025'::numeric))
+                                      Rows Removed by Filter: 5853
+                                      Buffers: shared hit=4488
+                                ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=1.279..1.279 rows=2 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=1584
+                                      ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.076..1.277 rows=2 loops=3)
+                                            Filter: (user_id = 15177)
+                                            Rows Removed by Filter: 53331
+                                            Buffers: shared hit=1584
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=9) (actual time=0.002..0.002 rows=0 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=388
+Planning Time: 0.545 ms
+Execution Time: 17.897 ms
+=== R14 run 3 ===
+Sort  (cost=8594.26..8594.27 rows=1 width=45) (actual time=17.353..18.010 rows=3 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6250
+  ->  GroupAggregate  (cost=8594.23..8594.25 rows=1 width=45) (actual time=17.345..18.003 rows=3 loops=1)
+        Group Key: m.mcc
+        Buffers: shared hit=6247
+        ->  Sort  (cost=8594.23..8594.23 rows=1 width=11) (actual time=17.337..17.994 rows=4 loops=1)
+              Sort Key: m.mcc
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=6247
+              ->  Nested Loop  (cost=2194.96..8594.22 rows=1 width=11) (actual time=13.542..17.980 rows=4 loops=1)
+                    Buffers: shared hit=6244
+                    ->  Gather  (cost=2194.68..8593.92 rows=1 width=10) (actual time=4.040..17.964 rows=11 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=6232
+                          ->  Hash Join  (cost=1194.67..7593.82 rows=1 width=10) (actual time=4.793..16.037 rows=4 loops=3)
+                                Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+                                Buffers: shared hit=6232
+                                ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=32305 width=34) (actual time=0.014..11.715 rows=77636 loops=3)
+                                      Filter: (((status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM initiated_at) >= '2025'::numeric))
+                                      Rows Removed by Filter: 5853
+                                      Buffers: shared hit=4488
+                                ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=1.298..1.299 rows=2 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=1584
+                                      ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.081..1.296 rows=2 loops=3)
+                                            Filter: (user_id = 15177)
+                                            Rows Removed by Filter: 53331
+                                            Buffers: shared hit=1584
+                    ->  Index Scan using merchants_pkey on merchants m  (cost=0.28..0.30 rows=1 width=9) (actual time=0.001..0.001 rows=0 loops=11)
+                          Index Cond: (merchant_id = t.merchant_id)
+                          Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=388
+Planning Time: 0.553 ms
+Execution Time: 18.038 ms

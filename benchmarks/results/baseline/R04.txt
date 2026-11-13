@@ -1,0 +1,57 @@
+=== R04 run 1 ===
+Gather Merge  (cost=7316.09..7329.86 rows=118 width=55) (actual time=9.516..10.170 rows=120 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4562
+  ->  Sort  (cost=6316.06..6316.21 rows=59 width=55) (actual time=8.014..8.015 rows=40 loops=3)
+        Sort Key: initiated_at
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=4562
+        Worker 0:  Sort Method: quicksort  Memory: 29kB
+        Worker 1:  Sort Method: quicksort  Memory: 28kB
+        ->  Parallel Seq Scan on transactions  (cost=0.00..6314.33 rows=59 width=55) (actual time=7.963..7.992 rows=40 loops=3)
+              Filter: (((status)::text = 'PENDING'::text) AND (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval)))
+              Rows Removed by Filter: 83449
+              Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.185 ms
+Execution Time: 10.186 ms
+=== R04 run 2 ===
+Gather Merge  (cost=7316.09..7329.86 rows=118 width=55) (actual time=9.376..10.048 rows=120 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4562
+  ->  Sort  (cost=6316.06..6316.21 rows=59 width=55) (actual time=7.910..7.911 rows=40 loops=3)
+        Sort Key: initiated_at
+        Sort Method: quicksort  Memory: 28kB
+        Buffers: shared hit=4562
+        Worker 0:  Sort Method: quicksort  Memory: 29kB
+        Worker 1:  Sort Method: quicksort  Memory: 25kB
+        ->  Parallel Seq Scan on transactions  (cost=0.00..6314.33 rows=59 width=55) (actual time=7.841..7.880 rows=40 loops=3)
+              Filter: (((status)::text = 'PENDING'::text) AND (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval)))
+              Rows Removed by Filter: 83449
+              Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.178 ms
+Execution Time: 10.064 ms
+=== R04 run 3 ===
+Gather Merge  (cost=7316.09..7329.86 rows=118 width=55) (actual time=8.601..9.164 rows=120 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=4562
+  ->  Sort  (cost=6316.06..6316.21 rows=59 width=55) (actual time=7.253..7.257 rows=40 loops=3)
+        Sort Key: initiated_at
+        Sort Method: quicksort  Memory: 29kB
+        Buffers: shared hit=4562
+        Worker 0:  Sort Method: quicksort  Memory: 28kB
+        Worker 1:  Sort Method: quicksort  Memory: 25kB
+        ->  Parallel Seq Scan on transactions  (cost=0.00..6314.33 rows=59 width=55) (actual time=7.194..7.226 rows=40 loops=3)
+              Filter: (((status)::text = 'PENDING'::text) AND (initiated_at < ('2026-06-30 23:59:00+05:30'::timestamp with time zone - '00:15:00'::interval)))
+              Rows Removed by Filter: 83449
+              Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.173 ms
+Execution Time: 9.179 ms

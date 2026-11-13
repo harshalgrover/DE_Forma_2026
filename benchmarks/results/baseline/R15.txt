@@ -1,0 +1,129 @@
+=== R15 run 1 ===
+Incremental Sort  (cost=8340.14..8499.64 rows=3000 width=67) (actual time=9.949..10.015 rows=100 loops=1)
+  Sort Key: m.city_id, (rank() OVER (?))
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=4608
+  ->  WindowAgg  (cost=8339.55..8399.53 rows=3000 width=67) (actual time=9.874..9.995 rows=100 loops=1)
+        Run Condition: (rank() OVER (?) <= 10)
+        Buffers: shared hit=4602
+        ->  Sort  (cost=8339.53..8347.03 rows=3000 width=59) (actual time=9.872..9.923 rows=2259 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=4602
+              ->  Finalize HashAggregate  (cost=8128.77..8166.27 rows=3000 width=59) (actual time=9.052..9.261 rows=2259 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1137kB
+                    Buffers: shared hit=4599
+                    ->  Gather  (cost=7446.27..8083.77 rows=6000 width=59) (actual time=7.848..8.199 rows=4278 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=4599
+                          ->  Partial HashAggregate  (cost=6446.27..6483.77 rows=3000 width=59) (actual time=6.370..6.562 rows=1426 loops=3)
+                                Group Key: m.merchant_id
+                                Batches: 1  Memory Usage: 881kB
+                                Buffers: shared hit=4599
+                                Worker 0:  Batches: 1  Memory Usage: 881kB
+                                Worker 1:  Batches: 1  Memory Usage: 881kB
+                                ->  Hash Join  (cost=102.50..6431.03 rows=3049 width=33) (actual time=5.392..6.076 rows=2396 loops=3)
+                                      Hash Cond: (t.merchant_id = m.merchant_id)
+                                      Buffers: shared hit=4599
+                                      ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=5404 width=10) (actual time=5.058..5.493 rows=4236 loops=3)
+                                            Filter: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'SUCCESS'::text))
+                                            Rows Removed by Filter: 79253
+                                            Buffers: shared hit=4488
+                                      ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.319..0.319 rows=3000 loops=3)
+                                            Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                            Buffers: shared hit=105
+                                            ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.021..0.162 rows=3000 loops=3)
+                                                  Buffers: shared hit=105
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.397 ms
+Execution Time: 10.072 ms
+=== R15 run 2 ===
+Incremental Sort  (cost=8340.14..8499.64 rows=3000 width=67) (actual time=9.656..9.717 rows=100 loops=1)
+  Sort Key: m.city_id, (rank() OVER (?))
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=4608
+  ->  WindowAgg  (cost=8339.55..8399.53 rows=3000 width=67) (actual time=9.580..9.699 rows=100 loops=1)
+        Run Condition: (rank() OVER (?) <= 10)
+        Buffers: shared hit=4602
+        ->  Sort  (cost=8339.53..8347.03 rows=3000 width=59) (actual time=9.578..9.626 rows=2259 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=4602
+              ->  Finalize HashAggregate  (cost=8128.77..8166.27 rows=3000 width=59) (actual time=8.696..8.925 rows=2259 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1137kB
+                    Buffers: shared hit=4599
+                    ->  Gather  (cost=7446.27..8083.77 rows=6000 width=59) (actual time=7.453..7.798 rows=4272 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=4599
+                          ->  Partial HashAggregate  (cost=6446.27..6483.77 rows=3000 width=59) (actual time=6.253..6.439 rows=1424 loops=3)
+                                Group Key: m.merchant_id
+                                Batches: 1  Memory Usage: 881kB
+                                Buffers: shared hit=4599
+                                Worker 0:  Batches: 1  Memory Usage: 881kB
+                                Worker 1:  Batches: 1  Memory Usage: 881kB
+                                ->  Hash Join  (cost=102.50..6431.03 rows=3049 width=33) (actual time=5.267..5.951 rows=2396 loops=3)
+                                      Hash Cond: (t.merchant_id = m.merchant_id)
+                                      Buffers: shared hit=4599
+                                      ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=5404 width=10) (actual time=4.911..5.341 rows=4236 loops=3)
+                                            Filter: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'SUCCESS'::text))
+                                            Rows Removed by Filter: 79253
+                                            Buffers: shared hit=4488
+                                      ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.343..0.343 rows=3000 loops=3)
+                                            Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                            Buffers: shared hit=105
+                                            ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.022..0.160 rows=3000 loops=3)
+                                                  Buffers: shared hit=105
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.359 ms
+Execution Time: 9.772 ms
+=== R15 run 3 ===
+Incremental Sort  (cost=8340.14..8499.64 rows=3000 width=67) (actual time=9.399..9.464 rows=100 loops=1)
+  Sort Key: m.city_id, (rank() OVER (?))
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=4608
+  ->  WindowAgg  (cost=8339.55..8399.53 rows=3000 width=67) (actual time=9.325..9.446 rows=100 loops=1)
+        Run Condition: (rank() OVER (?) <= 10)
+        Buffers: shared hit=4602
+        ->  Sort  (cost=8339.53..8347.03 rows=3000 width=59) (actual time=9.323..9.372 rows=2259 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=4602
+              ->  Finalize HashAggregate  (cost=8128.77..8166.27 rows=3000 width=59) (actual time=8.517..8.729 rows=2259 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1137kB
+                    Buffers: shared hit=4599
+                    ->  Gather  (cost=7446.27..8083.77 rows=6000 width=59) (actual time=7.334..7.669 rows=4279 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          Buffers: shared hit=4599
+                          ->  Partial HashAggregate  (cost=6446.27..6483.77 rows=3000 width=59) (actual time=6.096..6.282 rows=1426 loops=3)
+                                Group Key: m.merchant_id
+                                Batches: 1  Memory Usage: 881kB
+                                Buffers: shared hit=4599
+                                Worker 0:  Batches: 1  Memory Usage: 881kB
+                                Worker 1:  Batches: 1  Memory Usage: 881kB
+                                ->  Hash Join  (cost=102.50..6431.03 rows=3049 width=33) (actual time=5.147..5.809 rows=2396 loops=3)
+                                      Hash Cond: (t.merchant_id = m.merchant_id)
+                                      Buffers: shared hit=4599
+                                      ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=5404 width=10) (actual time=4.818..5.229 rows=4236 loops=3)
+                                            Filter: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone) AND ((status)::text = 'SUCCESS'::text))
+                                            Rows Removed by Filter: 79253
+                                            Buffers: shared hit=4488
+                                      ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.315..0.315 rows=3000 loops=3)
+                                            Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                            Buffers: shared hit=105
+                                            ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.022..0.157 rows=3000 loops=3)
+                                                  Buffers: shared hit=105
+Planning:
+  Buffers: shared hit=229
+Planning Time: 0.346 ms
+Execution Time: 9.533 ms

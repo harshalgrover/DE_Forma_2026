@@ -1,0 +1,69 @@
+=== R09 run 1 ===
+Sort  (cost=55564.27..55758.09 rows=77531 width=79) (actual time=898.099..898.113 rows=468 loops=1)
+  Sort Key: t.initiated_at DESC
+  Sort Method: quicksort  Memory: 70kB
+  Buffers: shared hit=4494, temp read=2222 written=2228
+  ->  Subquery Scan on t  (cost=37098.07..45820.29 rows=77531 width=79) (actual time=700.545..898.029 rows=468 loops=1)
+        Filter: (t.gap < '00:10:00'::interval)
+        Rows Removed by Filter: 232441
+        Buffers: shared hit=4491, temp read=2222 written=2228
+        ->  WindowAgg  (cost=37098.07..42912.87 rows=232593 width=79) (actual time=700.225..893.369 rows=232909 loops=1)
+              Buffers: shared hit=4491, temp read=2222 written=2228
+              ->  Sort  (cost=37098.05..37679.53 rows=232593 width=63) (actual time=700.216..853.820 rows=232909 loops=1)
+                    Sort Key: transactions.payer_vpa, transactions.payee_vpa, transactions.initiated_at
+                    Sort Method: external merge  Disk: 17776kB
+                    Buffers: shared hit=4491, temp read=2222 written=2228
+                    ->  Seq Scan on transactions  (cost=0.00..7618.85 rows=232593 width=63) (actual time=0.010..23.033 rows=232909 loops=1)
+                          Filter: ((status)::text = 'SUCCESS'::text)
+                          Rows Removed by Filter: 17559
+                          Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.259 ms
+Execution Time: 898.941 ms
+=== R09 run 2 ===
+Sort  (cost=55564.27..55758.09 rows=77531 width=79) (actual time=904.351..904.363 rows=468 loops=1)
+  Sort Key: t.initiated_at DESC
+  Sort Method: quicksort  Memory: 70kB
+  Buffers: shared hit=4494, temp read=2222 written=2228
+  ->  Subquery Scan on t  (cost=37098.07..45820.29 rows=77531 width=79) (actual time=709.538..904.286 rows=468 loops=1)
+        Filter: (t.gap < '00:10:00'::interval)
+        Rows Removed by Filter: 232441
+        Buffers: shared hit=4491, temp read=2222 written=2228
+        ->  WindowAgg  (cost=37098.07..42912.87 rows=232593 width=79) (actual time=709.215..899.637 rows=232909 loops=1)
+              Buffers: shared hit=4491, temp read=2222 written=2228
+              ->  Sort  (cost=37098.05..37679.53 rows=232593 width=63) (actual time=709.205..861.018 rows=232909 loops=1)
+                    Sort Key: transactions.payer_vpa, transactions.payee_vpa, transactions.initiated_at
+                    Sort Method: external merge  Disk: 17776kB
+                    Buffers: shared hit=4491, temp read=2222 written=2228
+                    ->  Seq Scan on transactions  (cost=0.00..7618.85 rows=232593 width=63) (actual time=0.009..22.462 rows=232909 loops=1)
+                          Filter: ((status)::text = 'SUCCESS'::text)
+                          Rows Removed by Filter: 17559
+                          Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.224 ms
+Execution Time: 905.034 ms
+=== R09 run 3 ===
+Sort  (cost=55564.27..55758.09 rows=77531 width=79) (actual time=930.484..930.495 rows=468 loops=1)
+  Sort Key: t.initiated_at DESC
+  Sort Method: quicksort  Memory: 70kB
+  Buffers: shared hit=4494, temp read=2222 written=2228
+  ->  Subquery Scan on t  (cost=37098.07..45820.29 rows=77531 width=79) (actual time=724.248..930.416 rows=468 loops=1)
+        Filter: (t.gap < '00:10:00'::interval)
+        Rows Removed by Filter: 232441
+        Buffers: shared hit=4491, temp read=2222 written=2228
+        ->  WindowAgg  (cost=37098.07..42912.87 rows=232593 width=79) (actual time=723.910..925.821 rows=232909 loops=1)
+              Buffers: shared hit=4491, temp read=2222 written=2228
+              ->  Sort  (cost=37098.05..37679.53 rows=232593 width=63) (actual time=723.901..886.422 rows=232909 loops=1)
+                    Sort Key: transactions.payer_vpa, transactions.payee_vpa, transactions.initiated_at
+                    Sort Method: external merge  Disk: 17776kB
+                    Buffers: shared hit=4491, temp read=2222 written=2228
+                    ->  Seq Scan on transactions  (cost=0.00..7618.85 rows=232593 width=63) (actual time=0.008..22.522 rows=232909 loops=1)
+                          Filter: ((status)::text = 'SUCCESS'::text)
+                          Rows Removed by Filter: 17559
+                          Buffers: shared hit=4488
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.223 ms
+Execution Time: 932.259 ms

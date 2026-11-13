@@ -1,0 +1,75 @@
+=== R03 run 1 ===
+Aggregate  (cost=8510.38..8510.39 rows=1 width=32) (actual time=18.487..19.012 rows=1 loops=1)
+  Buffers: shared hit=6232
+  ->  Gather  (cost=2194.68..8510.38 rows=1 width=6) (actual time=18.485..19.010 rows=0 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=6232
+        ->  Hash Join  (cost=1194.67..7510.28 rows=1 width=6) (actual time=16.928..16.929 rows=0 loops=3)
+              Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+              Buffers: shared hit=6232
+              ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=485 width=30) (actual time=14.714..14.765 rows=146 loops=3)
+                    Filter: (((status)::text = ANY ('{SUCCESS,PENDING}'::text[])) AND (date(initiated_at) = '2026-06-30'::date))
+                    Rows Removed by Filter: 83343
+                    Buffers: shared hit=4488
+              ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=2.088..2.088 rows=2 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1584
+                    ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.148..2.083 rows=2 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 53331
+                          Buffers: shared hit=1584
+Planning:
+  Buffers: shared hit=259
+Planning Time: 1.045 ms
+Execution Time: 19.037 ms
+=== R03 run 2 ===
+Aggregate  (cost=8510.38..8510.39 rows=1 width=32) (actual time=17.302..17.881 rows=1 loops=1)
+  Buffers: shared hit=6232
+  ->  Gather  (cost=2194.68..8510.38 rows=1 width=6) (actual time=17.299..17.878 rows=0 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=6232
+        ->  Hash Join  (cost=1194.67..7510.28 rows=1 width=6) (actual time=15.740..15.741 rows=0 loops=3)
+              Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+              Buffers: shared hit=6232
+              ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=485 width=30) (actual time=13.524..13.596 rows=146 loops=3)
+                    Filter: (((status)::text = ANY ('{SUCCESS,PENDING}'::text[])) AND (date(initiated_at) = '2026-06-30'::date))
+                    Rows Removed by Filter: 83343
+                    Buffers: shared hit=4488
+              ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=2.072..2.072 rows=2 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1584
+                    ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.137..2.067 rows=2 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 53331
+                          Buffers: shared hit=1584
+Planning:
+  Buffers: shared hit=259
+Planning Time: 0.380 ms
+Execution Time: 17.900 ms
+=== R03 run 3 ===
+Aggregate  (cost=8510.38..8510.39 rows=1 width=32) (actual time=15.006..15.577 rows=1 loops=1)
+  Buffers: shared hit=6232
+  ->  Gather  (cost=2194.68..8510.38 rows=1 width=6) (actual time=15.003..15.575 rows=0 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=6232
+        ->  Hash Join  (cost=1194.67..7510.28 rows=1 width=6) (actual time=13.606..13.607 rows=0 loops=3)
+              Hash Cond: ((t.payer_vpa)::text = (v.vpa)::text)
+              Buffers: shared hit=6232
+              ->  Parallel Seq Scan on transactions t  (cost=0.00..6314.33 rows=485 width=30) (actual time=11.735..11.797 rows=146 loops=3)
+                    Filter: (((status)::text = ANY ('{SUCCESS,PENDING}'::text[])) AND (date(initiated_at) = '2026-06-30'::date))
+                    Rows Removed by Filter: 83343
+                    Buffers: shared hit=4488
+              ->  Hash  (cost=1194.66..1194.66 rows=1 width=24) (actual time=1.752..1.752 rows=2 loops=3)
+                    Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                    Buffers: shared hit=1584
+                    ->  Seq Scan on vpas v  (cost=0.00..1194.66 rows=1 width=24) (actual time=0.110..1.749 rows=2 loops=3)
+                          Filter: (user_id = 15177)
+                          Rows Removed by Filter: 53331
+                          Buffers: shared hit=1584
+Planning:
+  Buffers: shared hit=259
+Planning Time: 0.400 ms
+Execution Time: 15.595 ms
