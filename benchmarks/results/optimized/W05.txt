@@ -1,0 +1,75 @@
+=== W05 run 1 ===
+Update on bill_payments  (cost=27.45..421.08 rows=0 width=0) (actual time=1.367..1.367 rows=0.00 loops=1)
+  Buffers: shared hit=1803 dirtied=81 written=2
+  ->  Bitmap Heap Scan on bill_payments  (cost=27.45..421.08 rows=1442 width=64) (actual time=0.023..0.264 rows=201.00 loops=1)
+        Recheck Cond: ((due_date < '2026-07-05'::date) AND ((status)::text = 'DUE'::text))
+        Heap Blocks: exact=150
+        Buffers: shared hit=152
+        ->  Bitmap Index Scan on idx_bills_due_date  (cost=0.00..27.09 rows=1442 width=0) (actual time=0.010..0.010 rows=201.00 loops=1)
+              Index Cond: (due_date < '2026-07-05'::date)
+              Index Searches: 1
+              Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=116
+Planning Time: 0.287 ms
+Execution Time: 1.412 ms
+=== W05 run 2 ===
+Update on bill_payments  (cost=27.52..423.26 rows=0 width=0) (actual time=0.908..0.909 rows=0.00 loops=1)
+  Buffers: shared hit=1785 dirtied=4 written=3
+  ->  Bitmap Heap Scan on bill_payments  (cost=27.52..423.26 rows=1450 width=64) (actual time=0.023..0.257 rows=201.00 loops=1)
+        Recheck Cond: ((due_date < '2026-07-05'::date) AND ((status)::text = 'DUE'::text))
+        Heap Blocks: exact=150
+        Buffers: shared hit=152
+        ->  Bitmap Index Scan on idx_bills_due_date  (cost=0.00..27.15 rows=1450 width=0) (actual time=0.008..0.009 rows=201.00 loops=1)
+              Index Cond: (due_date < '2026-07-05'::date)
+              Index Searches: 1
+              Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=116
+Planning Time: 0.252 ms
+Execution Time: 0.951 ms
+=== W05 run 3 ===
+Update on bill_payments  (cost=27.60..426.52 rows=0 width=0) (actual time=0.911..0.911 rows=0.00 loops=1)
+  Buffers: shared hit=1791 dirtied=2 written=2
+  ->  Bitmap Heap Scan on bill_payments  (cost=27.60..426.52 rows=1461 width=64) (actual time=0.023..0.256 rows=201.00 loops=1)
+        Recheck Cond: ((due_date < '2026-07-05'::date) AND ((status)::text = 'DUE'::text))
+        Heap Blocks: exact=150
+        Buffers: shared hit=152
+        ->  Bitmap Index Scan on idx_bills_due_date  (cost=0.00..27.23 rows=1461 width=0) (actual time=0.009..0.009 rows=201.00 loops=1)
+              Index Cond: (due_date < '2026-07-05'::date)
+              Index Searches: 1
+              Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=116
+Planning Time: 0.240 ms
+Execution Time: 0.953 ms
+=== W05 run 4 ===
+Update on bill_payments  (cost=27.66..428.70 rows=0 width=0) (actual time=0.917..0.917 rows=0.00 loops=1)
+  Buffers: shared hit=1783 dirtied=2 written=2
+  ->  Bitmap Heap Scan on bill_payments  (cost=27.66..428.70 rows=1469 width=64) (actual time=0.024..0.263 rows=201.00 loops=1)
+        Recheck Cond: ((due_date < '2026-07-05'::date) AND ((status)::text = 'DUE'::text))
+        Heap Blocks: exact=150
+        Buffers: shared hit=152
+        ->  Bitmap Index Scan on idx_bills_due_date  (cost=0.00..27.29 rows=1469 width=0) (actual time=0.009..0.009 rows=201.00 loops=1)
+              Index Cond: (due_date < '2026-07-05'::date)
+              Index Searches: 1
+              Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=116
+Planning Time: 0.247 ms
+Execution Time: 0.961 ms
+=== W05 run 5 ===
+Update on bill_payments  (cost=27.72..430.88 rows=0 width=0) (actual time=0.998..0.998 rows=0.00 loops=1)
+  Buffers: shared hit=1898 dirtied=3 written=3
+  ->  Bitmap Heap Scan on bill_payments  (cost=27.72..430.88 rows=1477 width=64) (actual time=0.021..0.250 rows=201.00 loops=1)
+        Recheck Cond: ((due_date < '2026-07-05'::date) AND ((status)::text = 'DUE'::text))
+        Heap Blocks: exact=150
+        Buffers: shared hit=152
+        ->  Bitmap Index Scan on idx_bills_due_date  (cost=0.00..27.36 rows=1477 width=0) (actual time=0.008..0.009 rows=201.00 loops=1)
+              Index Cond: (due_date < '2026-07-05'::date)
+              Index Searches: 1
+              Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=116
+Planning Time: 0.239 ms
+Execution Time: 1.040 ms

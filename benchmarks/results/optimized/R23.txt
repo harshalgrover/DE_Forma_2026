@@ -1,0 +1,55 @@
+=== R23 run 1 ===
+Limit  (cost=9645.30..9646.51 rows=25 width=42) (actual time=13.232..13.234 rows=25.00 loops=1)
+  Buffers: shared hit=1644
+  ->  Index Only Scan using idx_tx_initiated_desc on transactions  (cost=0.42..12079.09 rows=250468 width=42) (actual time=0.032..9.794 rows=200025.00 loops=1)
+        Heap Fetches: 57
+        Index Searches: 1
+        Buffers: shared hit=1644
+Planning:
+  Buffers: shared hit=377
+Planning Time: 0.607 ms
+Execution Time: 13.247 ms
+=== R23 run 2 ===
+Limit  (cost=9645.30..9646.51 rows=25 width=42) (actual time=11.660..11.661 rows=25.00 loops=1)
+  Buffers: shared hit=1644
+  ->  Index Only Scan using idx_tx_initiated_desc on transactions  (cost=0.42..12079.09 rows=250468 width=42) (actual time=0.028..8.398 rows=200025.00 loops=1)
+        Heap Fetches: 57
+        Index Searches: 1
+        Buffers: shared hit=1644
+Planning:
+  Buffers: shared hit=377
+Planning Time: 0.585 ms
+Execution Time: 11.673 ms
+=== R23 run 3 ===
+Limit  (cost=9645.30..9646.51 rows=25 width=42) (actual time=11.984..11.986 rows=25.00 loops=1)
+  Buffers: shared hit=1644
+  ->  Index Only Scan using idx_tx_initiated_desc on transactions  (cost=0.42..12079.09 rows=250468 width=42) (actual time=0.028..8.688 rows=200025.00 loops=1)
+        Heap Fetches: 57
+        Index Searches: 1
+        Buffers: shared hit=1644
+Planning:
+  Buffers: shared hit=377
+Planning Time: 0.541 ms
+Execution Time: 11.998 ms
+=== R23 run 4 ===
+Limit  (cost=9645.30..9646.51 rows=25 width=42) (actual time=11.977..11.979 rows=25.00 loops=1)
+  Buffers: shared hit=1644
+  ->  Index Only Scan using idx_tx_initiated_desc on transactions  (cost=0.42..12079.09 rows=250468 width=42) (actual time=0.028..8.685 rows=200025.00 loops=1)
+        Heap Fetches: 57
+        Index Searches: 1
+        Buffers: shared hit=1644
+Planning:
+  Buffers: shared hit=377
+Planning Time: 0.530 ms
+Execution Time: 11.992 ms
+=== R23 run 5 ===
+Limit  (cost=9645.30..9646.51 rows=25 width=42) (actual time=11.811..11.813 rows=25.00 loops=1)
+  Buffers: shared hit=1644
+  ->  Index Only Scan using idx_tx_initiated_desc on transactions  (cost=0.42..12079.09 rows=250468 width=42) (actual time=0.027..8.538 rows=200025.00 loops=1)
+        Heap Fetches: 57
+        Index Searches: 1
+        Buffers: shared hit=1644
+Planning:
+  Buffers: shared hit=377
+Planning Time: 0.521 ms
+Execution Time: 11.824 ms
