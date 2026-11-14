@@ -1,0 +1,180 @@
+=== R15 run 1 ===
+Incremental Sort  (cost=903.66..1063.15 rows=3000 width=67) (actual time=3.493..3.553 rows=100.00 loops=1)
+  Sort Key: m.city_id, (rank() OVER w1)
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=117 dirtied=1
+  ->  WindowAgg  (cost=903.06..963.04 rows=3000 width=67) (actual time=3.414..3.535 rows=100.00 loops=1)
+        Window: w1 AS (PARTITION BY m.city_id ORDER BY (sum(t.amount)) ROWS UNBOUNDED PRECEDING)
+        Run Condition: (rank() OVER w1 <= 10)
+        Storage: Memory  Maximum Storage: 17kB
+        Buffers: shared hit=111 dirtied=1
+        ->  Sort  (cost=903.04..910.54 rows=3000 width=59) (actual time=3.411..3.454 rows=2259.00 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=111 dirtied=1
+              ->  HashAggregate  (cost=692.28..729.78 rows=3000 width=59) (actual time=2.468..2.699 rows=2259.00 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1105kB
+                    Buffers: shared hit=108 dirtied=1
+                    ->  Hash Join  (cost=102.92..656.77 rows=7103 width=33) (actual time=0.345..1.680 rows=7187.00 loops=1)
+                          Hash Cond: (t.merchant_id = m.merchant_id)
+                          Buffers: shared hit=108 dirtied=1
+                          ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..520.75 rows=12758 width=10) (actual time=0.008..0.583 rows=12708.00 loops=1)
+                                Index Cond: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                                Heap Fetches: 48
+                                Index Searches: 1
+                                Buffers: shared hit=73 dirtied=1
+                          ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.332..0.332 rows=3000.00 loops=1)
+                                Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                Buffers: shared hit=35
+                                ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.004..0.154 rows=3000.00 loops=1)
+                                      Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=562
+Planning Time: 0.993 ms
+Execution Time: 3.610 ms
+=== R15 run 2 ===
+Incremental Sort  (cost=903.66..1063.15 rows=3000 width=67) (actual time=3.312..3.372 rows=100.00 loops=1)
+  Sort Key: m.city_id, (rank() OVER w1)
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=112
+  ->  WindowAgg  (cost=903.06..963.04 rows=3000 width=67) (actual time=3.233..3.353 rows=100.00 loops=1)
+        Window: w1 AS (PARTITION BY m.city_id ORDER BY (sum(t.amount)) ROWS UNBOUNDED PRECEDING)
+        Run Condition: (rank() OVER w1 <= 10)
+        Storage: Memory  Maximum Storage: 17kB
+        Buffers: shared hit=106
+        ->  Sort  (cost=903.04..910.54 rows=3000 width=59) (actual time=3.229..3.274 rows=2259.00 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=106
+              ->  HashAggregate  (cost=692.28..729.78 rows=3000 width=59) (actual time=2.340..2.561 rows=2259.00 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1105kB
+                    Buffers: shared hit=103
+                    ->  Hash Join  (cost=102.92..656.77 rows=7103 width=33) (actual time=0.334..1.574 rows=7187.00 loops=1)
+                          Hash Cond: (t.merchant_id = m.merchant_id)
+                          Buffers: shared hit=103
+                          ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..520.75 rows=12758 width=10) (actual time=0.008..0.512 rows=12708.00 loops=1)
+                                Index Cond: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                                Heap Fetches: 43
+                                Index Searches: 1
+                                Buffers: shared hit=68
+                          ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.322..0.322 rows=3000.00 loops=1)
+                                Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                Buffers: shared hit=35
+                                ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.003..0.147 rows=3000.00 loops=1)
+                                      Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=562
+Planning Time: 0.991 ms
+Execution Time: 3.417 ms
+=== R15 run 3 ===
+Incremental Sort  (cost=903.66..1063.15 rows=3000 width=67) (actual time=3.052..3.107 rows=100.00 loops=1)
+  Sort Key: m.city_id, (rank() OVER w1)
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=112
+  ->  WindowAgg  (cost=903.06..963.04 rows=3000 width=67) (actual time=2.979..3.090 rows=100.00 loops=1)
+        Window: w1 AS (PARTITION BY m.city_id ORDER BY (sum(t.amount)) ROWS UNBOUNDED PRECEDING)
+        Run Condition: (rank() OVER w1 <= 10)
+        Storage: Memory  Maximum Storage: 17kB
+        Buffers: shared hit=106
+        ->  Sort  (cost=903.04..910.54 rows=3000 width=59) (actual time=2.976..3.015 rows=2259.00 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=106
+              ->  HashAggregate  (cost=692.28..729.78 rows=3000 width=59) (actual time=2.161..2.362 rows=2259.00 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1105kB
+                    Buffers: shared hit=103
+                    ->  Hash Join  (cost=102.92..656.77 rows=7103 width=33) (actual time=0.311..1.457 rows=7187.00 loops=1)
+                          Hash Cond: (t.merchant_id = m.merchant_id)
+                          Buffers: shared hit=103
+                          ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..520.75 rows=12758 width=10) (actual time=0.007..0.475 rows=12708.00 loops=1)
+                                Index Cond: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                                Heap Fetches: 43
+                                Index Searches: 1
+                                Buffers: shared hit=68
+                          ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.299..0.300 rows=3000.00 loops=1)
+                                Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                Buffers: shared hit=35
+                                ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.003..0.141 rows=3000.00 loops=1)
+                                      Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=562
+Planning Time: 0.950 ms
+Execution Time: 3.148 ms
+=== R15 run 4 ===
+Incremental Sort  (cost=903.66..1063.15 rows=3000 width=67) (actual time=2.988..3.041 rows=100.00 loops=1)
+  Sort Key: m.city_id, (rank() OVER w1)
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=112
+  ->  WindowAgg  (cost=903.06..963.04 rows=3000 width=67) (actual time=2.916..3.025 rows=100.00 loops=1)
+        Window: w1 AS (PARTITION BY m.city_id ORDER BY (sum(t.amount)) ROWS UNBOUNDED PRECEDING)
+        Run Condition: (rank() OVER w1 <= 10)
+        Storage: Memory  Maximum Storage: 17kB
+        Buffers: shared hit=106
+        ->  Sort  (cost=903.04..910.54 rows=3000 width=59) (actual time=2.913..2.952 rows=2259.00 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=106
+              ->  HashAggregate  (cost=692.28..729.78 rows=3000 width=59) (actual time=2.096..2.298 rows=2259.00 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1105kB
+                    Buffers: shared hit=103
+                    ->  Hash Join  (cost=102.92..656.77 rows=7103 width=33) (actual time=0.298..1.418 rows=7187.00 loops=1)
+                          Hash Cond: (t.merchant_id = m.merchant_id)
+                          Buffers: shared hit=103
+                          ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..520.75 rows=12758 width=10) (actual time=0.007..0.470 rows=12708.00 loops=1)
+                                Index Cond: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                                Heap Fetches: 43
+                                Index Searches: 1
+                                Buffers: shared hit=68
+                          ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.286..0.286 rows=3000.00 loops=1)
+                                Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                Buffers: shared hit=35
+                                ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.003..0.138 rows=3000.00 loops=1)
+                                      Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=562
+Planning Time: 0.888 ms
+Execution Time: 3.082 ms
+=== R15 run 5 ===
+Incremental Sort  (cost=903.66..1063.15 rows=3000 width=67) (actual time=2.919..2.970 rows=100.00 loops=1)
+  Sort Key: m.city_id, (rank() OVER w1)
+  Presorted Key: m.city_id
+  Full-sort Groups: 3  Sort Method: quicksort  Average Memory: 27kB  Peak Memory: 27kB
+  Buffers: shared hit=112
+  ->  WindowAgg  (cost=903.06..963.04 rows=3000 width=67) (actual time=2.851..2.954 rows=100.00 loops=1)
+        Window: w1 AS (PARTITION BY m.city_id ORDER BY (sum(t.amount)) ROWS UNBOUNDED PRECEDING)
+        Run Condition: (rank() OVER w1 <= 10)
+        Storage: Memory  Maximum Storage: 17kB
+        Buffers: shared hit=106
+        ->  Sort  (cost=903.04..910.54 rows=3000 width=59) (actual time=2.848..2.886 rows=2259.00 loops=1)
+              Sort Key: m.city_id, (sum(t.amount)) DESC
+              Sort Method: quicksort  Memory: 216kB
+              Buffers: shared hit=106
+              ->  HashAggregate  (cost=692.28..729.78 rows=3000 width=59) (actual time=2.081..2.272 rows=2259.00 loops=1)
+                    Group Key: m.merchant_id
+                    Batches: 1  Memory Usage: 1105kB
+                    Buffers: shared hit=103
+                    ->  Hash Join  (cost=102.92..656.77 rows=7103 width=33) (actual time=0.303..1.385 rows=7187.00 loops=1)
+                          Hash Cond: (t.merchant_id = m.merchant_id)
+                          Buffers: shared hit=103
+                          ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..520.75 rows=12758 width=10) (actual time=0.007..0.448 rows=12708.00 loops=1)
+                                Index Cond: ((initiated_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                                Heap Fetches: 43
+                                Index Searches: 1
+                                Buffers: shared hit=68
+                          ->  Hash  (cost=65.00..65.00 rows=3000 width=27) (actual time=0.291..0.291 rows=3000.00 loops=1)
+                                Buckets: 4096  Batches: 1  Memory Usage: 207kB
+                                Buffers: shared hit=35
+                                ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=27) (actual time=0.003..0.138 rows=3000.00 loops=1)
+                                      Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=562
+Planning Time: 0.888 ms
+Execution Time: 3.009 ms

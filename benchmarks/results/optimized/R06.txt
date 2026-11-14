@@ -1,0 +1,130 @@
+=== R06 run 1 ===
+Sort  (cost=142.94..143.54 rows=238 width=63) (actual time=0.434..0.438 rows=204.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 36kB
+  Buffers: shared hit=44
+  ->  HashAggregate  (cost=130.57..133.55 rows=238 width=63) (actual time=0.387..0.403 rows=204.00 loops=1)
+        Group Key: m.merchant_id
+        Batches: 1  Memory Usage: 112kB
+        Buffers: shared hit=41
+        ->  Hash Join  (cost=102.92..128.79 rows=238 width=29) (actual time=0.315..0.354 rows=220.00 loops=1)
+              Hash Cond: (t.merchant_id = m.merchant_id)
+              Buffers: shared hit=41
+              ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..25.16 rows=428 width=10) (actual time=0.013..0.033 rows=423.00 loops=1)
+                    Index Cond: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=6
+              ->  Hash  (cost=65.00..65.00 rows=3000 width=23) (actual time=0.296..0.296 rows=3000.00 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 196kB
+                    Buffers: shared hit=35
+                    ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=23) (actual time=0.004..0.137 rows=3000.00 loops=1)
+                          Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=542
+Planning Time: 0.916 ms
+Execution Time: 0.481 ms
+=== R06 run 2 ===
+Sort  (cost=142.94..143.54 rows=238 width=63) (actual time=0.477..0.481 rows=204.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 36kB
+  Buffers: shared hit=44
+  ->  HashAggregate  (cost=130.57..133.55 rows=238 width=63) (actual time=0.430..0.447 rows=204.00 loops=1)
+        Group Key: m.merchant_id
+        Batches: 1  Memory Usage: 112kB
+        Buffers: shared hit=41
+        ->  Hash Join  (cost=102.92..128.79 rows=238 width=29) (actual time=0.317..0.376 rows=220.00 loops=1)
+              Hash Cond: (t.merchant_id = m.merchant_id)
+              Buffers: shared hit=41
+              ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..25.16 rows=428 width=10) (actual time=0.006..0.028 rows=423.00 loops=1)
+                    Index Cond: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=6
+              ->  Hash  (cost=65.00..65.00 rows=3000 width=23) (actual time=0.306..0.306 rows=3000.00 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 196kB
+                    Buffers: shared hit=35
+                    ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=23) (actual time=0.004..0.135 rows=3000.00 loops=1)
+                          Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=542
+Planning Time: 0.910 ms
+Execution Time: 0.515 ms
+=== R06 run 3 ===
+Sort  (cost=142.94..143.54 rows=238 width=63) (actual time=0.415..0.419 rows=204.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 36kB
+  Buffers: shared hit=44
+  ->  HashAggregate  (cost=130.57..133.55 rows=238 width=63) (actual time=0.358..0.375 rows=204.00 loops=1)
+        Group Key: m.merchant_id
+        Batches: 1  Memory Usage: 112kB
+        Buffers: shared hit=41
+        ->  Hash Join  (cost=102.92..128.79 rows=238 width=29) (actual time=0.286..0.324 rows=220.00 loops=1)
+              Hash Cond: (t.merchant_id = m.merchant_id)
+              Buffers: shared hit=41
+              ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..25.16 rows=428 width=10) (actual time=0.007..0.024 rows=423.00 loops=1)
+                    Index Cond: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=6
+              ->  Hash  (cost=65.00..65.00 rows=3000 width=23) (actual time=0.274..0.274 rows=3000.00 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 196kB
+                    Buffers: shared hit=35
+                    ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=23) (actual time=0.004..0.125 rows=3000.00 loops=1)
+                          Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=542
+Planning Time: 0.952 ms
+Execution Time: 0.458 ms
+=== R06 run 4 ===
+Sort  (cost=142.94..143.54 rows=238 width=63) (actual time=0.405..0.409 rows=204.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 36kB
+  Buffers: shared hit=44
+  ->  HashAggregate  (cost=130.57..133.55 rows=238 width=63) (actual time=0.356..0.373 rows=204.00 loops=1)
+        Group Key: m.merchant_id
+        Batches: 1  Memory Usage: 112kB
+        Buffers: shared hit=41
+        ->  Hash Join  (cost=102.92..128.79 rows=238 width=29) (actual time=0.282..0.320 rows=220.00 loops=1)
+              Hash Cond: (t.merchant_id = m.merchant_id)
+              Buffers: shared hit=41
+              ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..25.16 rows=428 width=10) (actual time=0.006..0.023 rows=423.00 loops=1)
+                    Index Cond: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=6
+              ->  Hash  (cost=65.00..65.00 rows=3000 width=23) (actual time=0.271..0.271 rows=3000.00 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 196kB
+                    Buffers: shared hit=35
+                    ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=23) (actual time=0.004..0.125 rows=3000.00 loops=1)
+                          Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=542
+Planning Time: 0.898 ms
+Execution Time: 0.442 ms
+=== R06 run 5 ===
+Sort  (cost=142.94..143.54 rows=238 width=63) (actual time=0.402..0.406 rows=204.00 loops=1)
+  Sort Key: (sum(t.amount)) DESC
+  Sort Method: quicksort  Memory: 36kB
+  Buffers: shared hit=44
+  ->  HashAggregate  (cost=130.57..133.55 rows=238 width=63) (actual time=0.353..0.370 rows=204.00 loops=1)
+        Group Key: m.merchant_id
+        Batches: 1  Memory Usage: 112kB
+        Buffers: shared hit=41
+        ->  Hash Join  (cost=102.92..128.79 rows=238 width=29) (actual time=0.281..0.320 rows=220.00 loops=1)
+              Hash Cond: (t.merchant_id = m.merchant_id)
+              Buffers: shared hit=41
+              ->  Index Only Scan using idx_tx_success_time on transactions t  (cost=0.42..25.16 rows=428 width=10) (actual time=0.006..0.023 rows=423.00 loops=1)
+                    Index Cond: ((initiated_at >= '2026-06-29 00:00:00+05:30'::timestamp with time zone) AND (initiated_at < '2026-06-30 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 0
+                    Index Searches: 1
+                    Buffers: shared hit=6
+              ->  Hash  (cost=65.00..65.00 rows=3000 width=23) (actual time=0.270..0.270 rows=3000.00 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 196kB
+                    Buffers: shared hit=35
+                    ->  Seq Scan on merchants m  (cost=0.00..65.00 rows=3000 width=23) (actual time=0.003..0.123 rows=3000.00 loops=1)
+                          Buffers: shared hit=35
+Planning:
+  Buffers: shared hit=542
+Planning Time: 0.878 ms
+Execution Time: 0.438 ms

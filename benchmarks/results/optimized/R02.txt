@@ -1,0 +1,75 @@
+=== R02 run 1 ===
+Nested Loop  (cost=0.70..16.74 rows=1 width=37) (actual time=0.020..0.021 rows=1.00 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..8.43 rows=1 width=29) (actual time=0.013..0.013 rows=1.00 loops=1)
+        Index Cond: ((vpa)::text = 'aditya.gupta15177@okhdfcbank'::text)
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.31 rows=1 width=16) (actual time=0.006..0.006 rows=1.00 loops=1)
+        Index Cond: (user_id = v.user_id)
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=276 read=3
+Planning Time: 0.926 ms
+Execution Time: 0.043 ms
+=== R02 run 2 ===
+Nested Loop  (cost=0.70..16.74 rows=1 width=37) (actual time=0.018..0.019 rows=1.00 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..8.43 rows=1 width=29) (actual time=0.012..0.012 rows=1.00 loops=1)
+        Index Cond: ((vpa)::text = 'aditya.gupta15177@okhdfcbank'::text)
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.31 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+        Index Cond: (user_id = v.user_id)
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=279
+Planning Time: 0.543 ms
+Execution Time: 0.044 ms
+=== R02 run 3 ===
+Nested Loop  (cost=0.70..16.74 rows=1 width=37) (actual time=0.018..0.019 rows=1.00 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..8.43 rows=1 width=29) (actual time=0.012..0.012 rows=1.00 loops=1)
+        Index Cond: ((vpa)::text = 'aditya.gupta15177@okhdfcbank'::text)
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.31 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+        Index Cond: (user_id = v.user_id)
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=279
+Planning Time: 0.546 ms
+Execution Time: 0.042 ms
+=== R02 run 4 ===
+Nested Loop  (cost=0.70..16.74 rows=1 width=37) (actual time=0.016..0.017 rows=1.00 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..8.43 rows=1 width=29) (actual time=0.011..0.011 rows=1.00 loops=1)
+        Index Cond: ((vpa)::text = 'aditya.gupta15177@okhdfcbank'::text)
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.31 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+        Index Cond: (user_id = v.user_id)
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=279
+Planning Time: 0.514 ms
+Execution Time: 0.037 ms
+=== R02 run 5 ===
+Nested Loop  (cost=0.70..16.74 rows=1 width=37) (actual time=0.015..0.016 rows=1.00 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using vpas_pkey on vpas v  (cost=0.41..8.43 rows=1 width=29) (actual time=0.010..0.010 rows=1.00 loops=1)
+        Index Cond: ((vpa)::text = 'aditya.gupta15177@okhdfcbank'::text)
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.31 rows=1 width=16) (actual time=0.004..0.004 rows=1.00 loops=1)
+        Index Cond: (user_id = v.user_id)
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=279
+Planning Time: 0.508 ms
+Execution Time: 0.036 ms
